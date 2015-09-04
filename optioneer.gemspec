@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Seapagan']
   spec.email         = ['seapagan@gmail.com']
 
-  spec.summary       = 'A Ruby Gem to parse Command Line Options. Yes, anorther one!'
+  spec.summary       = 'A Ruby Gem to parse Command Line Options. Yes, another one!'
   spec.homepage      = 'https://github.com/seapagan/optioneer'
   spec.license       = 'MIT'
 
