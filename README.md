@@ -53,7 +53,7 @@ introduced with new major versions. As a result of this policy, you can (and
 should) specify a dependency on this gem using the [Pessimistic Version
 Constraint][pvc] with two digits of precision. For example:
 
-    spec.add_dependency 'confoog', '~> 1.0'
+    spec.add_dependency 'optioneer', '~> 1.0'
 
 Of course, currently we have not even reached version 1, so leave off the version requirement completely. Expect any and all of the API and interface to change!
 
