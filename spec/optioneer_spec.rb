@@ -6,7 +6,6 @@ describe Optioneer do
   end
 
   it 'should create an instance of the class with no errors' do
-    settings = Optioneer.new
-    expect(settings).to be_a Optioneer
+    expect(subject).to be_a Optioneer
   end
 end
