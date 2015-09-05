@@ -5,7 +5,8 @@ describe Optioneer do
     expect(Optioneer::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'should create an instance of the class with no errors' do
+    settings = Optioneer.new
+    expect(settings).to be_a Optioneer
   end
 end
