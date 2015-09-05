@@ -14,4 +14,5 @@ end
 
 # task :inch currently disabled until project is a little more mature and proper
 # documentation can begin
-task default: [:rubocop, :spec]
+# task :rubocop also currently disabled
+task default: [:spec]
