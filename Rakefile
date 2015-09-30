@@ -31,5 +31,5 @@ end
 # manually though :
 # :rubocop
 # :inch
-# : reek
+# :reek
 task default: [:spec, :build]
