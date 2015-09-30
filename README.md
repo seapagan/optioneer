@@ -1,10 +1,10 @@
-# Optioneer
-[![Gem Version](https://badge.fury.io/rb/optioneer.svg)](http://badge.fury.io/rb/optioneer)
-[![Build Status](https://travis-ci.org/seapagan/optioneer.svg)](https://travis-ci.org/seapagan/optioneer)
+# Optioneer [![Gem Version](https://badge.fury.io/rb/optioneer.svg)](http://badge.fury.io/rb/optioneer)[![Build Status](https://travis-ci.org/seapagan/optioneer.svg)](https://travis-ci.org/seapagan/optioneer)
+
 [![Dependency Status](https://gemnasium.com/seapagan/optioneer.svg)](https://gemnasium.com/seapagan/optioneer)
 [![Coverage Status](https://coveralls.io/repos/seapagan/optioneer/badge.svg?branch=master&service=github)](https://coveralls.io/github/seapagan/optioneer?branch=master)
 [![Code Climate](https://codeclimate.com/github/seapagan/optioneer/badges/gpa.svg)](https://codeclimate.com/github/seapagan/optioneer)
 [![Inline docs](http://inch-ci.org/github/seapagan/optioneer.svg?branch=master)](http://inch-ci.org/github/seapagan/optioneer)
+[![PullReview stats](https://www.pullreview.com/github/seapagan/optioneer/badges/master.svg?)](https://www.pullreview.com/github/seapagan/optioneer/reviews/master)
 
 A Ruby Gem to parse Command Line options. Yes, another one!
 
