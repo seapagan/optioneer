@@ -12,7 +12,24 @@ Inch::Rake::Suggest.new do |suggest|
   suggest.args << '--pedantic'
 end
 
-# task :inch currently disabled until project is a little more mature and proper
-# documentation can begin
-# task :rubocop also currently disabled
-task default: [:spec]
+# reek is not comp[atible with Ruby < 2.0]
+if RUBY_VERSION > '2.0'
+  require 'reek/rake/task'
+  Reek::Rake::Task.new do |t|
+    t.fail_on_error = false
+    t.verbose       = true
+    t.reek_opts     = '-U'
+  end
+else
+  task :reek do
+    # Empty task
+  end
+end
+
+# Auto running of the below tasks are currently disabled until the project is a
+# little more mature and proper documentation can begin. They can still be run
+# manually though :
+# :rubocop
+# :inch
+# : reek
+task default: [:spec, :build]
