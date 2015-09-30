@@ -35,7 +35,7 @@ module Optioneer
 
     private
 
-    # Given a name, will return the Option matching.
+    # Given a name, will return details of the matching Option.
     def find_opt_by_name(name)
       @command_options.each do |opt|
         return true if opt.name == name
