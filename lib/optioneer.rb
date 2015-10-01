@@ -5,7 +5,7 @@ require 'optioneer/option'
 module Optioneer
   # Main control class
   class Optioneer
-    # Hash containin any options we want to define as defaults of not specified
+    # Hash containing any options we want to define as defaults if not specified
     DEFAULT_OPTIONS = {}
 
     # Setup the class with specified parameters or default values if any or all

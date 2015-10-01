@@ -1,5 +1,5 @@
 module Optioneer
-  # This class will be instantiated for each individual
+  # This class will be instantiated for each individual option registered.
   class Option
     attr_reader :name
     def initialize(name)
