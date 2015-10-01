@@ -20,6 +20,7 @@ module Optioneer
       @command_options = []
     end
 
+    # Add a new option to the list, assuming it does not already exist.
     def add(name)
       unless find_opt_by_name(name)
         new_option = Option.new(name)

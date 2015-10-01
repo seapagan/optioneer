@@ -1,3 +1,4 @@
+# rubocop:disable LineLength
 require 'spec_helper'
 
 describe Optioneer do
@@ -26,7 +27,8 @@ describe Optioneer do
     end
     it 'will not allow options with the same name' do
       opt.add(:test)
-      expect{opt.add(:test)}.to raise_error(RuntimeError, 'You Cannot create 2 options with the same name.')
+      expect { opt.add(:test) }.to raise_error(RuntimeError,
+                                               'You Cannot create 2 options with the same name.')
       expect(opt.count).to eq 1
     end
     context 'with a new option, we can add the related information' do
