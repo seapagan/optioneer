@@ -8,6 +8,8 @@
 
 A Ruby Gem to parse Command Line options. Yes, another one!
 
+__Note : There is no actual usable functionality in this Gem yet, it is still in the preliminary design stages.__
+
 ## Installation
 
 Add this line to your application's Gemfile:
