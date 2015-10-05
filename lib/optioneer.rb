@@ -17,7 +17,18 @@ module Optioneer
       # set all other unset options to return false instead of Nul.
       @options.default = false
 
+      @options[:cmdline] = ARGV
+
       @command_options = []
+    end
+
+    # Start parsing the command line, return it in a format that is easy to use.
+    def parse
+      p ARGV
+    end
+
+    def cmdline
+      @options[:cmdline]
     end
 
     # Add a new option to the list, assuming it does not already exist.
