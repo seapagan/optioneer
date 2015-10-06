@@ -34,11 +34,9 @@ module Optioneer
         if opt.match(/^-/)
           # found a switch, is it long?
           if opt.match(/^--/)
-            opt.gsub!(/^--/, '')
-            find_option(opt, :long)
-          else # no it must be short
-            opt.gsub!(/^-/, '')
-            find_option(opt, :short)
+            find_option(opt.gsub(/^--/, ''), :long)
+          else
+            find_option(opt.gsub(/^-/, ''), :short)
           end
         # if we are not a switch, must be an action, but only if last item.
         elsif index == @options[:cmd_tweaked].count - 1
