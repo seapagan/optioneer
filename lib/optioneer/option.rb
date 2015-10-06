@@ -1,22 +1,22 @@
 module Optioneer
-  # This class will be instantiated for each individual option registered.
+  # an instance will be created for each individual option registered or passed.
   class Option
     attr_reader :name
-    def initialize(name)
+    def initialize(name, options = {})
       @name = name
-      @data = {}
+      @data = options
     end
 
     def short=(short_form)
-      @data[:short_form] = short_form
+      @data[:short] = short_form
     end
 
     def long=(long_form)
-      @data[:long_form] = long_form
+      @data[:long] = long_form
     end
 
     def argument=(argument)
-      @data[:argument] = argument
+      @data[:arg] = argument
     end
 
     def help=(help)
