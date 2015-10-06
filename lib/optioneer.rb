@@ -105,22 +105,23 @@ module Optioneer
       @expected_options.each do |expected|
         # we need to test first if an argument is included...
         the_opt = opt
-        the_opt, the_arg = opt.split('=') if opt =~ /\=/
+        (the_opt, the_arg) = opt.split('=') if opt =~ /\=/
         next unless the_opt == expected.values[which]
         new_option = Option.new(expected.name)
         which == :long ? new_option.long = the_opt : new_option.short = the_opt
-        new_option.argument = the_arg
+        # if an arg exists, add this to the option data
+        new_option.argument = the_arg if the_arg
         # check for both short and long options and fail if so
-        check_duplicate(expected)
+        # check_duplicate(expected)
+        # add the newly decoded option to the list
         @passed_options[expected.name] = new_option
       end
     end
 
     def check_duplicate(expected)
-      if @options[:cmd_tweaked] =~ /--#{expected.values[:long]}/ &&
-         @options[:cmd_tweaked] =~ /-#{expected.values[:short]}/
-        fail 'You cannot combine both long and short versions of an option!'
-      end
+      # determine if we have both short and long form of the same option,
+      # and raise error if so.
+
     end
 
     # Given a name, will return the object if the matching Option exists.

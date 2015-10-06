@@ -1,3 +1,4 @@
+# rubocop:disable LineLength
 require 'spec_helper'
 require 'yaml'
 
@@ -15,7 +16,6 @@ describe Optioneer do
     subject.add(:two, short: 'q', long: 'quiet')
     subject.add(:three, short: 's', long: 'switch', arg: 'OPTION')
     subject.add(:four, short: 'd', arg: 'DIRECTORY')
-    # puts subject.to_yaml
   end
 
   it 'stores the given command line when created' do
@@ -31,11 +31,22 @@ describe Optioneer do
       expect(subject[:three].values[:arg]).to eq 'option'
       expect(subject[:four].values[:arg]).to eq 'directory'
     end
-    it 'will not allow both the short and long form' do
-      pending 'to write'
+    skip 'will not allow both the short and long form' do
+      ARGV.clear
+      # this should return 4 switches (2 with options) and one action
+      @cmd = %w(-r --recurse --quiet --switch=option -d directory action)
+      (ARGV << @cmd).flatten!
+      # create opbect
+      opts = Optioneer::Optioneer.new
+      # create specs to validate these
+      opts.add(:one, short: 'r', long: 'recurse')
+      opts.add(:two, short: 'q', long: 'quiet')
+      opts.add(:three, short: 's', long: 'switch', arg: 'OPTION')
+      opts.add(:four, short: 'd', arg: 'DIRECTORY')
+      expect { opts.parse }.to raise_error(RuntimeError, 'You cannot combine both long and short versions of an option!')
     end
-    it 'will only allow registered options' do
-      pending 'to write'
+    skip 'will only allow registered options' do
+      
     end
     it 'returns the action specified' do
       subject.parse
