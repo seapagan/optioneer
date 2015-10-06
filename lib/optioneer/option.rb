@@ -2,7 +2,7 @@ module Optioneer
   # an instance will be created for each individual option registered or passed.
   class Option
     attr_reader :name
-    def initialize(name, options = {})
+    def initialize(name = '', options = {})
       @name = name
       @data = options
     end
