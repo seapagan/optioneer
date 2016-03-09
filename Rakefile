@@ -32,4 +32,4 @@ end
 # :rubocop
 # :inch
 # :reek
-task default: [:spec, :build]
+task default: [:inch, :spec, :build]
