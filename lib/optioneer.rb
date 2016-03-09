@@ -29,6 +29,10 @@ module Optioneer
     end
 
     # Start parsing the command line, return it in a format that is easy to use.
+    # @example
+    #   option = Optioneer::Optioneer.new
+    #   option.parse
+    # @return [fixnum] Count of flags and actions on the command line
     def parse
       @options[:cmd_tweaked].each_with_index do |opt, index|
         if opt =~ /^-/
@@ -46,16 +50,30 @@ module Optioneer
       @passed_options.count
     end
 
+    # return the 'action' assiciated with the command line
+    # @return [string] The action requested on the command line
     def action
       @options[:action]
     end
 
     # allow setting of the help display banner
+    # @param banner [string] The text banner to be shown with help, version, etc
+    # @example
+    #   option = Optioneer::Optioneer.new
+    #   option.banner = 'My fabulous application!'
+    # @return [string] The specified banner string
     def banner=(banner)
       @options[:banner] = banner
     end
 
     # return the current help display banner
+    # @param [none]
+    # @return [string] The previously set banner
+    # @example
+    #   option = Optioneer::Optioneer.new
+    #   option.banner = 'My fabulous application!'
+    #   option.banner
+    #   => 'My fabulous application!'
     def banner
       @options[:banner]
     end
@@ -66,6 +84,9 @@ module Optioneer
     end
 
     # Add a new option to the list, assuming it does not already exist.
+    # @param name [string] OPTIONAL name of this option
+    # @param options [hash] OPTIONAL hash containing the new option settings
+    # @return [Class] Returns the instance of the newly created option
     def add(name, options = {})
       unless find_opt_by_name(name)
         new_option = Option.new(name, options)
@@ -76,11 +97,18 @@ module Optioneer
     end
 
     # return the named passed option
+    # @param name [string] The name of the parameter to query
+    # @return [string] options with this name
     def [](name)
       @passed_options[name]
     end
 
     # return the count of EXPECTED options
+    # @param [none]
+    # @return [fixnum] Number of different options we EXPECT
+    # @example
+    #   option.count
+    #   => 4
     def count
       @expected_options.count
     end
