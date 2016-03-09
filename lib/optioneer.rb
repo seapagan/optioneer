@@ -6,7 +6,7 @@ module Optioneer
   # Main control class
   class Optioneer
     # Hash containing any options we want to define as defaults if not specified
-    DEFAULT_OPTIONS = {}
+    DEFAULT_OPTIONS = {}.freeze
 
     # Setup the class with specified parameters or default values if any or all
     # are absent.
@@ -31,9 +31,9 @@ module Optioneer
     # Start parsing the command line, return it in a format that is easy to use.
     def parse
       @options[:cmd_tweaked].each_with_index do |opt, index|
-        if opt.match(/^-/)
+        if opt =~ /^-/
           # found a switch, is it long?
-          if opt.match(/^--/)
+          if opt =~ /^--/
             find_option(opt.gsub(/^--/, ''), :long)
           else
             find_option(opt.gsub(/^-/, ''), :short)
@@ -72,7 +72,7 @@ module Optioneer
         @expected_options.push(new_option)
         return new_option
       end
-      fail 'You Cannot create 2 options with the same name.'
+      raise 'You Cannot create 2 options with the same name.'
     end
 
     # return the named passed option
@@ -90,9 +90,9 @@ module Optioneer
     # adjust the command line to lump any short-form arguments together
     def tweak_cmd(cmd_line)
       cmd_line.each_with_index do |arg, index|
-        next unless arg.match(/^-[A-Za-z0-9]$/)
+        next unless arg =~ /^-[A-Za-z0-9]$/
         # we have a short form, see if there is an argument next in the array
-        next if cmd_line[index + 1].match(/^-/)
+        next if cmd_line[index + 1] =~ /^-/
         # there is so we merge the 2 parts, with '=' between them
         cmd_line[index] = "#{cmd_line[index]}=#{cmd_line[index + 1]}"
         cmd_line.delete_at(index + 1)
@@ -121,7 +121,6 @@ module Optioneer
     def check_duplicate(expected)
       # determine if we have both short and long form of the same option,
       # and raise error if so.
-
     end
 
     # Given a name, will return the object if the matching Option exists.

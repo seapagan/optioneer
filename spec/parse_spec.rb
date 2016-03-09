@@ -46,7 +46,6 @@ describe Optioneer do
       expect { opts.parse }.to raise_error(RuntimeError, 'You cannot combine both long and short versions of an option!')
     end
     skip 'will only allow registered options' do
-      
     end
     it 'returns the action specified' do
       subject.parse
