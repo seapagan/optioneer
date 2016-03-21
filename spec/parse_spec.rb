@@ -31,7 +31,7 @@ describe Optioneer do
       expect(subject[:three].values[:arg]).to eq 'option'
       expect(subject[:four].values[:arg]).to eq 'directory'
     end
-    skip 'will not allow both the short and long form' do
+    it 'will not allow both the short and long form' do
       ARGV.clear
       # this should return 4 switches (2 with options) and one action
       @cmd = %w(-r --recurse --quiet --switch=option -d directory action)
