@@ -45,7 +45,7 @@ describe Optioneer do
       opts.add(:four, short: 'd', arg: 'DIRECTORY')
       expect { opts.parse }.to raise_error(RuntimeError, 'You cannot combine both long and short versions of an option!')
     end
-    skip 'will only allow registered options' do
+    it 'will only allow registered options', skip: 'Functionality and test still to be written' do
     end
     it 'returns the action specified' do
       subject.parse
