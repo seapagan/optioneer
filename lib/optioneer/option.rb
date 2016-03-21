@@ -28,11 +28,11 @@ module Optioneer
     end
 
     # set the 'argument' for this option if appliciable
-    # @param arguement [string] The arguement for the command
+    # @param argument [string] The argument for the command
     # @example
     #   opt = Option.new(:test)
-    #   opt.arguement = 'explode'
-    # @return [string] The arguement just set.
+    #   opt.argument = 'explode'
+    # @return [string] The argement just set.
     def argument=(argument)
       @data[:arg] = argument
     end
