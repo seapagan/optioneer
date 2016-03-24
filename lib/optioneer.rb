@@ -164,14 +164,6 @@ module Optioneer
       false
     end
 
-    # Given a long option, will return the name of the matching Option.
-    def find_name_by_long(long)
-      @expected_options.each do |opt|
-        return opt.name if opt.values[:long] == long
-      end
-      nil
-    end
-
     # given a long option will get the matching short
     def get_short_from_long(long)
       @expected_options.each do |opt|
