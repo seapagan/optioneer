@@ -31,10 +31,12 @@ Or install it yourself as:
 TODO: Write usage instructions here
 
 ## To Do
-
 Thoughts in no particular order.
 
--
+- Add ability to set (optional) default value and type for each option
+- Choose default return value for registered flags that are not specified on command line (True / False / Nil?)
+- Add automatic 'inverse' flags - ie if `--color` is described then `--no-color` will return the inverse result
+- Automatically create short-form flags from the long-form if not specified.
 
 ## Development
 
