@@ -1,6 +1,5 @@
 # rubocop:disable LineLength
 require 'spec_helper'
-require 'yaml'
 
 describe Optioneer do
   subject { Optioneer::Optioneer.new }
