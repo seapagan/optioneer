@@ -23,7 +23,7 @@ module Optioneer
       @options[:cmd_tweaked] = tweak_cmd(ARGV)
 
       # array to hold the EXPECTED comamnd line options
-      @expected_options = []
+      @options[:expected] = []
       # hash to hold the named PASSED command line options
       @passed_options = {}
     end
@@ -86,7 +86,7 @@ module Optioneer
     def add(name, options = {})
       unless find_opt_by_name(name)
         new_option = Option.new(name, options)
-        @expected_options.push(new_option)
+        @options[:expected].push(new_option)
         return new_option
       end
       raise 'You Cannot create 2 options with the same name.'
@@ -106,7 +106,7 @@ module Optioneer
     #   option.count
     #   => 4
     def count
-      @expected_options.count
+      @options[:expected].count
     end
 
     private
@@ -128,7 +128,7 @@ module Optioneer
       # remove the dashes ...
       opt = opt.delete('-')
       # loop through all options and see if we have a match
-      @expected_options.each do |expected|
+      @options[:expected].each do |expected|
         # we need to test first if an argument is included...
         (the_opt, the_arg) = opt.split('=')
         next unless the_opt == expected.values[which]
@@ -155,7 +155,7 @@ module Optioneer
 
     # Given a name, will return the object if the matching Option exists.
     def find_opt_by_name(name)
-      @expected_options.each do |opt|
+      @options[:expected].each do |opt|
         return opt if opt.name == name
       end
       false
@@ -163,7 +163,7 @@ module Optioneer
 
     # given a long option will get the matching short
     def get_short_from_long(long)
-      @expected_options.each do |opt|
+      @options[:expected].each do |opt|
         return opt.values[:short] if opt.values[:long] == long
       end
       nil
