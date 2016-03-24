@@ -47,7 +47,7 @@ module Optioneer
           @options[:action] = opt
         end
       end
-      @passed_options.count
+      @passed_options.count unless check_duplicate
     end
 
     # return the 'action' assiciated with the command line
@@ -139,16 +139,21 @@ module Optioneer
         which == :long ? new_option.long = the_opt : new_option.short = the_opt
         # if an arg exists, add this to the option data
         new_option.argument = the_arg if the_arg
-        # check for both short and long options and fail if so
-        # check_duplicate(expected)
         # add the newly decoded option to the list
         @passed_options[expected.name] = new_option
       end
     end
 
-    def check_duplicate(expected)
+    def check_duplicate
       # determine if we have both short and long form of the same option,
       # and raise error if so.
+      cmdline.each do |opt|
+        next unless opt =~ /^--/
+        short = "-#{get_short_from_long(opt.delete!('-'))}"
+        next unless @options[:cmdline].include?(short)
+        raise 'You cannot combine both long and short versions of an option!'
+      end
+      false
     end
 
     # Given a name, will return the object if the matching Option exists.
@@ -157,6 +162,14 @@ module Optioneer
         return opt if opt.name == name
       end
       false
+    end
+
+    # given a long option will get the matching short
+    def get_short_from_long(long)
+      @expected_options.each do |opt|
+        return opt.values[:short] if opt.values[:long] == long
+      end
+      nil
     end
   end
 end
