@@ -37,11 +37,7 @@ module Optioneer
       @options[:cmd_tweaked].each_with_index do |opt, index|
         if opt =~ /^-/
           # found a switch, is it long?
-          if opt =~ /^--/
-            find_option(opt.gsub(/^--/, ''), :long)
-          else
-            find_option(opt.gsub(/^-/, ''), :short)
-          end
+          opt =~ /^--/ ? find_option(opt, :long) : find_option(opt, :short)
         # if we are not a switch, must be an action, but only if last item.
         elsif index == @options[:cmd_tweaked].count - 1
           @options[:action] = opt
@@ -129,11 +125,12 @@ module Optioneer
 
     # searches for a match in the expected options.
     def find_option(opt, which)
+      # remove the dashes ...
+      opt = opt.delete('-')
       # loop through all options and see if we have a match
       @expected_options.each do |expected|
         # we need to test first if an argument is included...
-        the_opt = opt
-        (the_opt, the_arg) = opt.split('=') if opt =~ /\=/
+        (the_opt, the_arg) = opt.split('=')
         next unless the_opt == expected.values[which]
         new_option = Option.new(expected.name)
         which == :long ? new_option.long = the_opt : new_option.short = the_opt
@@ -149,7 +146,7 @@ module Optioneer
       # and raise error if so.
       cmdline.each do |opt|
         next unless opt =~ /^--/
-        short = "-#{get_short_from_long(opt.delete!('-'))}"
+        short = "-#{get_short_from_long(opt.delete('-'))}"
         next unless @options[:cmdline].include?(short)
         raise 'You cannot combine both long and short versions of an option!'
       end
