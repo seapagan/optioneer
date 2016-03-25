@@ -23,9 +23,9 @@ module Optioneer
       @options[:cmd_tweaked] = tweak_cmd(ARGV)
 
       # array to hold the EXPECTED comamnd line options
-      @expected_options = []
+      @options[:expected] = []
       # hash to hold the named PASSED command line options
-      @passed_options = {}
+      @options[:passed] = {}
     end
 
     # Start parsing the command line, return it in a format that is easy to use.
@@ -43,7 +43,7 @@ module Optioneer
           @options[:action] = opt
         end
       end
-      @passed_options.count unless check_duplicate
+      @options[:passed].count unless check_duplicate
     end
 
     # return the 'action' assiciated with the command line
@@ -86,7 +86,7 @@ module Optioneer
     def add(name, options = {})
       unless find_opt_by_name(name)
         new_option = Option.new(name, options)
-        @expected_options.push(new_option)
+        @options[:expected].push(new_option)
         return new_option
       end
       raise 'You Cannot create 2 options with the same name.'
@@ -96,7 +96,7 @@ module Optioneer
     # @param name [string] The name of the parameter to query
     # @return [string] options with this name
     def [](name)
-      @passed_options[name]
+      @options[:passed][name]
     end
 
     # return the count of EXPECTED options
@@ -106,7 +106,7 @@ module Optioneer
     #   option.count
     #   => 4
     def count
-      @expected_options.count
+      @options[:expected].count
     end
 
     private
@@ -125,19 +125,17 @@ module Optioneer
 
     # searches for a match in the expected options.
     def find_option(opt, which)
-      # remove the dashes ...
-      opt = opt.delete('-')
       # loop through all options and see if we have a match
-      @expected_options.each do |expected|
+      @options[:expected].each do |expected|
         # we need to test first if an argument is included...
-        (the_opt, the_arg) = opt.split('=')
+        (the_opt, the_arg) = opt.delete('-').split('=')
         next unless the_opt == expected.values[which]
         new_option = Option.new(expected.name)
         which == :long ? new_option.long = the_opt : new_option.short = the_opt
         # if an arg exists, add this to the option data
         new_option.argument = the_arg if the_arg
         # add the newly decoded option to the list
-        @passed_options[expected.name] = new_option
+        @options[:passed][expected.name] = new_option
       end
     end
 
@@ -155,7 +153,7 @@ module Optioneer
 
     # Given a name, will return the object if the matching Option exists.
     def find_opt_by_name(name)
-      @expected_options.each do |opt|
+      @options[:expected].each do |opt|
         return opt if opt.name == name
       end
       false
@@ -163,7 +161,7 @@ module Optioneer
 
     # given a long option will get the matching short
     def get_short_from_long(long)
-      @expected_options.each do |opt|
+      @options[:expected].each do |opt|
         return opt.values[:short] if opt.values[:long] == long
       end
       nil
