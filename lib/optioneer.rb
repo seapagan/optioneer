@@ -74,6 +74,28 @@ module Optioneer
       @options[:banner]
     end
 
+    # allow setting the version string
+    # @param version [string] The version string
+    # @example
+    #   option = Optioneer::Optioneer.new
+    #   option.version = '1.2.3'
+    # @return [string] The specified version string
+    def version=(version)
+      @options[:version] = version
+    end
+
+    # return the current version string
+    # @param [none]
+    # @return [string] The previously set version
+    # @example
+    #   option = Optioneer::Optioneer.new
+    #   option.version = '1.2.3'
+    #   option.version
+    #   => '1.2.3'
+    def version
+      @options[:version]
+    end
+
     # returns the original un-parsed command line passed to the program
     def cmdline
       @options[:cmdline]

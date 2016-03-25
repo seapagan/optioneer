@@ -14,6 +14,11 @@ describe Optioneer do
     banner_test.banner = 'An exciting banner for this application!'
     expect(banner_test.banner).to eq 'An exciting banner for this application!'
   end
+  it 'accepts a version string' do
+    version_test = subject.new
+    version_test.version = '1.2.4.beta1'
+    expect(version_test.version).to eq '1.2.4.beta1'
+  end
   context 'adding new command line options' do
     let(:opt) { subject.new }
     it 'will add a new named option' do
