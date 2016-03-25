@@ -37,6 +37,7 @@ Thoughts in no particular order.
 - Choose default return value for registered flags that are not specified on command line (True / False / Nil?)
 - Add automatic 'inverse' flags - ie if `--color` is described then `--no-color` will return the inverse result
 - Automatically create short-form flags from the long-form if not specified.
+- Automatically provide `--help` and `--version` functionality along with the associated short-forms (`-h` and `-v`)
 
 ## Development
 
