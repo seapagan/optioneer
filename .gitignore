@@ -9,3 +9,4 @@
 /tmp/
 .token
 .remote-sync.json
+*.sublime*
